@@ -2,7 +2,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/projects/edit/1/" method="post">
+<form action="/projects/add/" method="post">
     {% csrf_token %}
     {% if form %}
         <ul>

@@ -16,15 +16,12 @@ def project(request, project_id):
     return render(request, 'projects/project.html', {'project':project})
 
 def add_project(request):
-    form=ProjectForm(request.POST or None, request.FILES or None)
+    form = ProjectForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             project = form.save(commit=False)
             project.save()
-            messages.success(request, "Directory entry added successfully!",  extra_tags='alert-success') 
-            return HttpResponseRedirect("/")
-        else:
-            messages.error(request, "Something went wrong! Make sure all field are valid.", extra_tags='alert-warning')
+            return HttpResponseRedirect("/projects/")
     context = {
         "form": form
     }
