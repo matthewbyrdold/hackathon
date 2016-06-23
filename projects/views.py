@@ -10,14 +10,12 @@ from .models import Hackathon
 from .forms import ProjectForm
 
 def index(request, hackathon = get_current_hackathon()):
-    projects = Project.objects.all() # TODO: only get projects in current hackathon
-    context = {'projects': projects, 'hackathon':hackathon}
+    if hackathon:
+        projects = Project.objects.filter(hackathon__number = hackathon)
+    else:
+        projects = Project.objects.all()
+    context = {'projects': projects, 'hackathon': hackathon}
     return render(request, 'projects/index.html', context)
-    
-#def index(request, req_hackathon = get_current_hackathon()):
- #   projects = Project.objects.filter(hackathon__number = req_hackathon)
-  #  context = {'projects': projects, 'hackathon':req_hackathon}
-   # return render(request, 'projects/index.html', context)
 
 def project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
