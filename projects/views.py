@@ -6,9 +6,13 @@ from django.http import HttpResponseRedirect
 from .models import Project
 from .forms import ProjectForm
 
-def index(request):
-    projects = Project.objects.all()
-    context = {'projects': projects}
+def getCurrentHackathon():
+    #TODO
+    return 3
+
+def index(request, hackathon = getCurrentHackathon()):
+    projects = Project.objects.all() # TODO: only get projects in current hackathon
+    context = {'projects': projects, 'hackathon':hackathon}
     return render(request, 'projects/index.html', context)
 
 def project(request, project_id):
