@@ -3,19 +3,13 @@ from django.http import HttpResponse
 from django.template import loader
 from django.http import HttpResponseRedirect
 from django.db.models import Max
-from datetime import date
 
+from helpers import *
 from .models import Project
 from .models import Hackathon
 from .forms import ProjectForm
 
-def getCurrentHackathon():
-    today = date.today()
-    for hackathon in Hackathon.objects.all():
-        if hackathon.start_date <= today and hackathon.end_date >= today:
-            return hackathon.number
-
-def index(request, hackathon = getCurrentHackathon()):
+def index(request, hackathon = get_current_hackathon()):
     projects = Project.objects.all() # TODO: only get projects in current hackathon
     context = {'projects': projects, 'hackathon':hackathon}
     return render(request, 'projects/index.html', context)
