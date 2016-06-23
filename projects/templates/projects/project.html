@@ -1,1 +1,25 @@
-{{ project }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ project.name }}</title>
+</head>
+<body>
+    <h1>{{ project }}</h1>
+    <table>
+        <tr><td>Number of participants:</td></td> {{ project.min_participants }} to {{ project.max_participants }}
+    </td>
+    </div>
+    <div id="participants">
+        <h2>Participants:</h2>
+        <ul>
+        {% for participant in project.participants_as_list %}
+            <li>{{ participant }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <h2>Hackathon: {{ project.hackathon }}</h2>
+    <div id="description">
+        {{ project.description }}
+    </div>
+</body>
+</html>
