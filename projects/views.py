@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.template import loader
+from django.http import HttpResponseRedirect
 
 from .models import Project
-
-# Create your views here.
+from .forms import ProjectForm
 
 def index(request):
     projects = Project.objects.all()
@@ -14,10 +14,34 @@ def index(request):
 def project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     return render(request, 'projects/project.html', {'project':project})
-    #HttpResponse("Project %s" % project_id)
 
 def add_project(request):
-    return HttpResponse("Adding project")
+    form=ProjectForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.save()
+            messages.success(request, "Directory entry added successfully!",  extra_tags='alert-success') 
+            return HttpResponseRedirect("/")
+        else:
+            messages.error(request, "Something went wrong! Make sure all field are valid.", extra_tags='alert-warning')
+    context = {
+        "form": form
+    }
+    
+    return render(request, "projects/add.html", context)
 
 def edit_project(request, project_id):
-    return HttpResponse("Edit project %s" % project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    form = ProjectForm(request.POST or None, instance=project)
+    if form.is_valid():
+        project = form.save(commit=False)
+        project.save()
+        return HttpResponseRedirect("/projects/")
+
+    context = {
+        "form": form,
+        "project": project
+    }
+
+    return render(request, "projects/edit.html", context)
