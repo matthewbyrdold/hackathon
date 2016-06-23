@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import re
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.validators import MinValueValidator
@@ -17,6 +19,9 @@ class Project(models.Model):
     tags = models.TextField(blank=True)
     def __str__(self):
         return self.name
+
+    def participants_as_list(self):
+        return filter(bool, re.split(',;', self.participants))
 
 @python_2_unicode_compatible
 class Hackathon(models.Model):
