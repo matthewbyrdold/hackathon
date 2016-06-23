@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.validators import MinValueValidator
 
-# Create your models here.
+@python_2_unicode_compatible
 class Project(models.Model):
     name = models.CharField(max_length=240)
     description = models.TextField()
@@ -17,6 +17,7 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+@python_2_unicode_compatible
 class Hackathon(models.Model):
     number = models.IntegerField(primary_key=True)
     start_date = models.DateField()
