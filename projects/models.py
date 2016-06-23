@@ -9,12 +9,12 @@ class Project(models.Model):
     name = models.CharField(max_length=240)
     description = models.TextField()
     author = models.CharField(max_length=50)
-    participants = models.TextField()
+    participants = models.TextField(blank=True)
     min_participants = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     max_participants = models.PositiveIntegerField(validators=[MinValueValidator(1)])
-    hackathon = models.ForeignKey('Hackathon', on_delete=models.SET_NULL, null=True)
-    skills = models.TextField()
-    tags = models.TextField()
+    hackathon = models.ForeignKey('Hackathon', on_delete=models.SET_NULL, null=True, blank=True)
+    skills = models.TextField(blank=True)
+    tags = models.TextField(blank=True)
     def __str__(self):
         return self.name
 
