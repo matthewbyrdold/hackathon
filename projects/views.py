@@ -1,13 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse
+from django.template import loader
+
+from .models import Project
 
 # Create your views here.
-from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("List of projects")
+    projects = Project.objects.all()
+    context = {'projects': projects}
+    return render(request, 'projects/index.html', context)
 
 def project(request, project_id):
-    return HttpResponse("Project %s" % project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    return render(request, 'projects/project.html', {'project':project})
+    #HttpResponse("Project %s" % project_id)
 
 def add_project(request):
     return HttpResponse("Adding project")
