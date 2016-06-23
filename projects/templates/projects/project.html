@@ -2,28 +2,64 @@
 {% block title %}
     {{ project.name }}
 {% endblock title %}
-{% block content %}
-    <h1>{{ project }}</h1>
-    <table>
-        <tr><td>Required number of participants:</td><td>{{ project.min_participants }} to {{ project.max_participants }}</td></tr>
-        <tr><td>Hackathon:</td><td>{{ project.hackathon|default_if_none:"Unassigned" }}</td></tr>
-        <tr><td>Skills:</td><td>{{ project.skills }}</td></tr>
-        <tr><td>Tags:</td><td>{{ project.tags }}</td></tr>
-    <table>
-    <div id="participants">
-        <h3>Participants:</h3>
-        {% if project.participants %}
-            <ul>
-            {% for participant in project.participants_as_list %}
-                <li>{{ participant }}</li>
-            {% endfor %}
-            </ul>   
+{% block header %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            Project <i class="cubes icon"></i> 
+        </h1>
+        <h2>{{project}}</h2>
+        {% if project.spaces_left %}
+            <div class="ui huge primary button">Join<i class="right arrow icon"></i></div>
+        {% endif %}
+        <a class="ui huge primary button" href="{% url 'projects:edit_project' project.id %}">Edit&nbsp;&nbsp;&nbsp;<i class="edit icon"></i></a>
+        {% if project.spaces_left == False %}
+            <div class="ui bottom left attached teal label">Project Full</div>
+        {% endif %}
+        {% if project.hackathon %}
+            <div class="ui bottom right attached teal label">Hackathon {{ project.hackathon }}</div>
         {% else %}
-            Nobody :( </br>
-        {% endif %} 
+            <div class="ui bottom right attached red label">Hackathon unassigned</div>
+        {% endif %}
     </div>
-    <div id="description">
-        <h3>Descriptions</h3>
-        {{ project.description }}
+{% endblock %}
+{% block content %}
+    <div class="ui vertical stripe segment">
+        <h3 class="ui horizontal divider header">
+            <i class="user icon"></i> Participants
+        </h3>
+        <div class="ui basic center aligned segment">
+            {% if project.participants %}
+                {% for participant in project.participants_as_list %}
+                    <a class="ui label">{{ participant }}</a>
+                {% endfor %}
+            {% else %}
+                <a class="ui label"><i class="warning icon"></i> No participants</a>
+            {% endif %} 
+        </div>
+        <h3 class="ui horizontal divider header">
+            <i class="book icon"></i> Description
+        </h3>
+        <div class="ui basic segment">
+            {{ project.description }}
+        </div>
+    <h3 class="ui horizontal divider header">
+        <i class="certificate icon"></i>Skills
+    </h3>
+    {% if project.skills %}
+        <div class="ui list">
+            {% for skill in project.skills_list %}
+                <div class="item"><i class="right triangle icon"></i>{{ skill }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="ui basic center aligned segment">
+        {% if project.tags %} 
+        <i class="tags icon"></i> 
+            {% for tag in project.tag_list %} 
+                <a class="ui label">{{ tag }}<i class="delete icon"></i></a>
+            {% endfor %}
+        {% endif %}
+    <table>
     </div>
 {% endblock content %}

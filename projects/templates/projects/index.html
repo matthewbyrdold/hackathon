@@ -31,8 +31,7 @@
                         </a>
                         <div class="meta">
                             {{ project.min_participants }} - {{ project.max_participants }} people,
-                            {% if participants %} {{ project.participants }} signed up
-                            {% else %} 0 signed up {% endif %}
+                            {{ project.participants_count }} signed up
                         </div class="meta">
                         <div class="description">
                             {{ project.description|truncatechars:240 }}

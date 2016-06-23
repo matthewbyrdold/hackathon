@@ -21,7 +21,23 @@ class Project(models.Model):
         return self.name
 
     def participants_as_list(self):
-        return filter(bool, re.split(',;', self.participants))
+        return filter(bool, re.split('[,;]', self.participants))
+
+    def participants_count(self):
+        return len(self.participants_as_list())
+
+    def spaces_left(self):
+        return self.participants_count() < self.max_participants
+
+    def participants_needed(self):
+        return self.participants_count() > self.min_participants
+
+    def tag_list(self):
+        return filter(bool, re.split('[,;]', self.tags))
+
+    def skills_list(self):
+        return filter(bool, re.split('[,;]', self.skills))
+
 
 @python_2_unicode_compatible
 class Hackathon(models.Model):
