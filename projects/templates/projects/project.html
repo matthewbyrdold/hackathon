@@ -6,19 +6,25 @@
 <body>
     <h1>{{ project }}</h1>
     <table>
-        <tr><td>Number of participants:</td></td> {{ project.min_participants }} to {{ project.max_participants }}
-    </td>
-    </div>
+        <tr><td>Number of participants:</td></td> {{ project.min_participants }} to {{ project.max_participants }}</tr>
+        <tr><td>Hackathon:</td><td>{{ project.hackathon|default_if_none:"Unassigned" }}</td></tr>
+        <tr><td>Skills:</td><td>{{ project.skills }}</td></tr>
+        <tr><td>Tags:</td><td>{{ project.tags }}</td></tr>
+    <table>
     <div id="participants">
-        <h2>Participants:</h2>
-        <ul>
-        {% for participant in project.participants_as_list %}
-            <li>{{ participant }}</li>
-        {% endfor %}
-        </ul>
+        <h3>Participants:</h3>
+        {% if project.participants %}
+            <ul>
+            {% for participant in project.participants_as_list %}
+                <li>{{ participant }}</li>
+            {% endfor %}
+            </ul>   
+        {% else %}
+            Nobody :( </br>
+        {% endif %} 
     </div>
-    <h2>Hackathon: {{ project.hackathon }}</h2>
     <div id="description">
+        <h3>Descriptions</h3>
         {{ project.description }}
     </div>
 </body>
