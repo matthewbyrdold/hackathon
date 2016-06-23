@@ -14,8 +14,12 @@ class Project(models.Model):
     hackathon = models.ForeignKey('Hackathon', on_delete=models.SET_NULL, null=True)
     skills = models.TextField()
     tags = models.TextField()
+    def __str__(self):
+        return self.name
 
 class Hackathon(models.Model):
     number = models.IntegerField(primary_key=True)
     start_date = models.DateField()
     end_date = models.DateField()
+    def __str__(self):
+        return 'Hackathon {}'.format(self.number)
