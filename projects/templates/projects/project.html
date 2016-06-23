@@ -6,7 +6,7 @@
 <body>
     <h1>{{ project }}</h1>
     <table>
-        <tr><td>Number of participants:</td></td> {{ project.min_participants }} to {{ project.max_participants }}</tr>
+        <tr><td>Required number of participants:</td><td>{{ project.min_participants }} to {{ project.max_participants }}</td></tr>
         <tr><td>Hackathon:</td><td>{{ project.hackathon|default_if_none:"Unassigned" }}</td></tr>
         <tr><td>Skills:</td><td>{{ project.skills }}</td></tr>
         <tr><td>Tags:</td><td>{{ project.tags }}</td></tr>
