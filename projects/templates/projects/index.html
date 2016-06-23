@@ -1,9 +1,44 @@
-{% if projects %}
-    <ul>
-    {% for project in projects %}
-        <li><a href="{% url 'projects:project' project.id %}">{{ project.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No projects available.</p>
-{% endif %}
+{% extends 'projects/base.html' %}
+
+{% block header %}
+    <div class="ui inverted vertical masthead center aligned segment">
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        {% if current_hackathon %}
+            Hackathon {{ current_hackathon }}
+        {% else %}
+            Hackathon
+        {% endif %}
+      </h1>
+      <!--<h2>Subhead</h2>-->
+      <!--<div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>-->
+    </div>
+
+  </div>
+{% endblock %}
+
+{% block content %}
+
+    {% if projects %}
+
+        <div class="ui divided selection items">
+        {% for project in projects %}
+            <div class="item">
+                <a href="{% url 'projects:project' project.id %}">
+                    <div class="header">{{ project.name }}</div>
+                </a>
+                <!--<div class="description">
+                    <p>{{ project.description }}</p>
+                </div>-->
+            </div>
+        {% endfor %}
+        </div>
+
+    {% else %}
+
+        <p>This hackathon has no projects!</p>
+
+    {% endif %}
+
+{% endblock %}
