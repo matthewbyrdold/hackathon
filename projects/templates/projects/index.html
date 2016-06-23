@@ -1,44 +1,68 @@
 {% extends 'projects/base.html' %}
 
 {% block header %}
-    <div class="ui inverted vertical masthead center aligned segment">
-
     <div class="ui text container">
-      <h1 class="ui inverted header">
-        {% if current_hackathon %}
-            Hackathon {{ current_hackathon }}
-        {% else %}
-            Hackathon
-        {% endif %}
-      </h1>
-      <!--<h2>Subhead</h2>-->
-      <!--<div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>-->
+        <h1 class="ui inverted header">
+            {% if current_hackathon %}
+                Hackathon {{ current_hackathon }}
+            {% else %}
+                Hackathon <i class="coffee icon"></i>
+            {% endif %}
+        </h1>
+        <h2>View, join or create projects for the next Hackathon.</h2>
+        <a class="ui huge primary button" href="{% url 'projects:add_project' %}">Create <i class="plus icon"></i></a>
+        <div class="ui huge primary button">Join<i class="right arrow icon"></i></div>
     </div>
-
-  </div>
 {% endblock %}
 
 {% block content %}
+    <div class="ui vertical stripe segment">
 
-    {% if projects %}
+        <h2 class="ui header">Projects</h2>
 
-        <div class="ui divided selection items">
-        {% for project in projects %}
-            <div class="item">
-                <a href="{% url 'projects:project' project.id %}">
-                    <div class="header">{{ project.name }}</div>
-                </a>
-                <!--<div class="description">
-                    <p>{{ project.description }}</p>
-                </div>-->
+        {% if projects %}
+
+            <div class="ui two doubling stackable cards">
+            {% for project in projects %}
+                <div class="ui fluid card">
+                    <div class="content">
+                        <a class="header" href="{% url 'projects:project' project.id %}">
+                            {{ project.name }}
+                        </a>
+                        <div class="meta">
+                            {{ project.min_participants }} - {{ project.max_participants }} people,
+                            {% if participants %} {{ project.participants }} signed up
+                            {% else %} 0 signed up {% endif %}
+                        </div class="meta">
+                        <div class="description">
+                            {{ project.description|truncatechars:240 }}
+                        </div>
+                    </div>
+                <!-- <div class="extra content">-->
+                        <div class="ui two bottom attached buttons">
+                            <a class="ui button" href="{% url 'projects:project' project.id %}">View</a>
+                            <div class="ui primary button">Join</div>
+                        </div>
+                    <!--</div>-->
+                </div>
+            {% endfor %}
             </div>
-        {% endfor %}
-        </div>
+<!--            <div class="ui divided selection list">
+            {% for project in projects %}
+                <div class="item">
+                    <a class="header" href="{% url 'projects:project' project.id %}">
+                        {{ project.name }}
+                        <!--<div class="header">{{ project.name }}</div>-->
+<!--                    </a>
+                    <div class="description">
+                        <p>{{ project.description|truncatechars:80 }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>-->
 
-    {% else %}
-
-        <p>This hackathon has no projects!</p>
-
-    {% endif %}
-
+        {% else %}
+            <p>This hackathon has no projects!</p>
+        {% endif %}
+    </div>
 {% endblock %}
