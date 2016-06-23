@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>{{ project.name }}</title>
-</head>
-<body>
+{% extends "projects/base.html" %}
+{% block title %}
+    {{ project.name }}
+{% endblock title %}
+{% block content %}
     <h1>{{ project }}</h1>
     <table>
         <tr><td>Required number of participants:</td><td>{{ project.min_participants }} to {{ project.max_participants }}</td></tr>
@@ -27,5 +26,4 @@
         <h3>Descriptions</h3>
         {{ project.description }}
     </div>
-</body>
-</html>
+{% endblock content %}
