@@ -1,0 +1,15 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}" />
+    <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+    <title>{% block title %}Metathon{% endblock %}</title>
+<head>
+
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
