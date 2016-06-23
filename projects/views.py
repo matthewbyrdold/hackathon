@@ -2,13 +2,18 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.template import loader
 from django.http import HttpResponseRedirect
+from django.db.models import Max
+from datetime import date
 
 from .models import Project
+from .models import Hackathon
 from .forms import ProjectForm
 
 def getCurrentHackathon():
-    #TODO
-    return 3
+    today = date.today()
+    for hackathon in Hackathon.objects.all():
+        if hackathon.start_date <= today and hackathon.end_date >= today:
+            return hackathon.number
 
 def index(request, hackathon = getCurrentHackathon()):
     projects = Project.objects.all() # TODO: only get projects in current hackathon
