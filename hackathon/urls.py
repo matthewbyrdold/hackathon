@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.generic.base import TemplateView
+from hackathon.views import RegistrationView
 
 urlpatterns = [
     url(r'^', include('projects.urls')),
@@ -25,4 +27,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, {'template_name':'auth/login.html'}, name='auth_login'),
     url(r'^logout/$', auth_views.logout, name='auth_logout'),
+    url(r'^signup/complete/$',
+        TemplateView.as_view(template_name='auth/signup_complete.html'),
+        name='auth_signup_completed'),
+    url(r'^signup/$',
+        RegistrationView.as_view(),
+        name='auth_signup'),
 ]
