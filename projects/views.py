@@ -15,7 +15,7 @@ def index(request, hackathon = decide_which_hackathon_to_display()):
         projects = Project.objects.filter(hackathon__number = hackathon)
     else:
         projects = Project.objects.all()
-    hackathons = Hackathon.objects.all()
+    hackathons = decide_which_hackathons_to_display(4)
     context = {'projects': projects, 'hackathon': hackathon, 'hackathons': hackathons}
     return render(request, 'projects/index.html', context)
 

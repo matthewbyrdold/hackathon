@@ -1,4 +1,5 @@
 from datetime import date
+from django.db.models import Count
 
 from .models import Project
 from .models import Hackathon
@@ -35,7 +36,9 @@ def get_previous_hackathon(today):
                 
         if found_latest:
             return latest.number
-            
+
+def decide_which_hackathons_to_display(number):
+    return Hackathon.objects.values('number').annotate(start_date_count=Count('start_date')).order_by('-start_date_count')[:number]
 
 def decide_which_hackathon_to_display():
     today = date.today()
@@ -48,4 +51,5 @@ def decide_which_hackathon_to_display():
             return hackathon
         else:
             hackathon = get_previous_hackathon(today)
-            return hackathon
+            if hackathon != None:
+                return hackathon

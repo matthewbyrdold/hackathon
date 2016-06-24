@@ -8,6 +8,9 @@
         {% for hackathon in hackathons %}
         <a href="{% url 'projects:index' hackathon.number %}" class="item" > Hackathon #{{ hackathon.number }} </a>
         {% endfor %}
+        {% if hackathons.count > 3 %}
+            <a href="{% url 'hackathons:index' %}" class="item" > More </a>
+        {% endif %}
     </div>
   </div>
 {% endblock %}
