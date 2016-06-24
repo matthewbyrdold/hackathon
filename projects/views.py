@@ -10,7 +10,7 @@ from .models import Project
 from .models import Hackathon
 from .forms import ProjectForm
 
-def index(request, hackathon = get_current_hackathon()):
+def index(request, hackathon = decide_which_hackathon_to_display()):
     if hackathon:
         projects = Project.objects.filter(hackathon__number = hackathon)
     else:
