@@ -20,3 +20,7 @@
     action="{% url 'projects:edit_project' project.id %}"
     method="post"
 {% endblock%}
+
+{% block delete_button %}
+    <button class="ui red right floated button" type="submit" name="delete"><i class="warning sign icon"></i>Delete</button>
+{% endblock %}

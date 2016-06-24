@@ -61,8 +61,11 @@ def edit_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     form = ProjectForm(request.POST or None, instance=project)
     if form.is_valid():
-        project = form.save(commit=False)
-        project.save()
+        if "delete" in request.POST:
+            project.delete()
+        else:
+            project = form.save(commit=False)
+            project.save()
         return HttpResponseRedirect("/projects/")
 
     context = {
