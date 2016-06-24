@@ -4,9 +4,18 @@
 {% endblock title %}
 {% block header %}
 <div class="ui inverted vertical masthead center aligned segment">
+
+    <div class="ui borderless compact inverted menu">
+        <div class="ui container">
+        <a href="javascript:history.go(-1)" class="header item">
+            <i class="left arrow icon"></i>
+        </a>
+        </div>
+    </div>
+
     <div class="ui text container">
         <h1 class="ui inverted header">
-            Project <i class="cubes icon"></i> 
+            <i class="cubes icon"></i>&nbsp;Project
         </h1>
         <h2>{{project}}</h2>
         {% if project.spaces_left %}
@@ -17,14 +26,15 @@
             <div class="ui bottom left attached teal label">Project Full</div>
         {% endif %}
         {% if project.hackathon %}
-            <div class="ui bottom right attached teal label">Hackathon {{ project.hackathon }}</div>
+            <div class="ui bottom right attached teal label">{{ project.hackathon }}</div>
         {% else %}
-            <div class="ui bottom right attached red label">Hackathon unassigned</div>
+            <div class="ui bottom right attached red label">No Hackathon Assigned</div>
         {% endif %}
     </div>
 </div>
 {% endblock %}
 {% block content %}
+<div class="ui text container">
     <div class="ui vertical stripe segment">
         <h3 class="ui horizontal divider header">
             <i class="user icon"></i> Participants
@@ -36,7 +46,7 @@
                 {% endfor %}
             {% else %}
                 <a class="ui label"><i class="warning icon"></i> No participants</a>
-            {% endif %} 
+            {% endif %}
         </div>
         <h3 class="ui horizontal divider header">
             <i class="book icon"></i> Description
@@ -51,19 +61,20 @@
     <div class="ui basic segment">
         <div class="ui list">
             {% for skill in project.skills_list %}
-                <div class="item"><i class="right triangle icon"></i>{{ skill }}</div>
+                <div class="item"><i class="right triangle icon"></i>{{ skill.strip }}</div>
             {% endfor %}
         </div>
     </div>
     {% endif %}
 
     <div class="ui basic center aligned segment">
-        {% if project.tags %} 
-        <i class="tags icon"></i> 
-            {% for tag in project.tag_list %} 
+        {% if project.tags %}
+        <i class="tags icon"></i>
+            {% for tag in project.tag_list %}
                 <a class="ui label">{{ tag }}<i class="delete icon"></i></a>
             {% endfor %}
         {% endif %}
     <table>
     </div>
+</div>
 {% endblock content %}
