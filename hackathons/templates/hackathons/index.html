@@ -1,4 +1,55 @@
-{% for hackathon in hackathons %}
-    Hackathon: {{ hackathon.number }} <br/>
-    Dates: {{ hackathon.start_date }} - {{ hackathon.end_date }} <br/><br/>
-{% endfor %}
+{% extends 'base.html' %}
+
+{% block left_menu %}
+<div class="ui container left attached">
+    <a href="{% url 'projects:index' %}" class="header item">
+        <i class="left arrow icon"></i>
+    </a>
+</div>
+{% endblock %}
+
+
+{% block header %}
+<div class="ui text container">
+    <h1 class="ui inverted header">
+        Hackathons
+    </h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="ui center aligned grid">
+    <div class="left aligned twelve wide column">
+        <div class="ui vertical stripe segment">
+
+            {% if hackathons %}
+
+                <div class="ui three doubling stackable cards">
+                {% for hackathon in hackathons %}
+                    <div class="ui fluid card">
+                        <div class="content">
+                            <a class="header" a href="{% url 'projects:index' hackathon.number %}">
+                                Hackathon #{{ hackathon.number }}
+                            </a>
+                            <div class="meta">
+                                {{ hackathon.start_date }} - {{ hackathon.end_date }}
+                            </div class="meta">
+                        </div>
+                            <div class="ui one bottom attached buttons">
+                                <a class="ui button" href="{% url 'projects:index' hackathon.number %}">View</a>
+                                <div class="ui primary button"></div>
+                            </div>
+                    </div>
+                {% endfor %}
+                </div>
+
+            {% else %}
+                <p>There are no hackathons!</p>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
