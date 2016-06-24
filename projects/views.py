@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.http import HttpResponseRedirect
 from django.db.models import Max
+from django.contrib.auth.decorators import login_required
 
 from helpers import *
 from .models import Project
@@ -21,6 +22,7 @@ def project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     return render(request, 'projects/project.html', {'project':project})
 
+@login_required
 def add_project(request):
     form = ProjectForm(request.POST or None)
     if request.method == 'POST':
