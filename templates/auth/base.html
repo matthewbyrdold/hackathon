@@ -1,31 +1,18 @@
 {% extends 'base.html' %}
 
 {% block left_menu %}
-<div class="ui container">
-    <a href="javascript:history.go(-1)" class="header item">
-        <i class="left arrow icon"></i>
-    </a>
-</div>
+{% endblock %}
+
+{% block right_menu %}
 {% endblock %}
 
 {% block header %}
 <div class="ui inverted vertical masthead center aligned segment">
     <div class="ui text container">
         <h1 class="ui inverted header">
-            {% if hackathon %}
-                Hackathon #{{ hackathon }}
-            {% else %}
-                Hackathon <i class="coffee icon"></i>
-            {% endif %}
+            Hackathon <i class="coffee icon"></i>
         </h1>
-        <h2>View, join or create projects for the next Hackathon.</h2>
-        {% if request.user.is_authenticated %}
-            <a class="ui huge primary button" href="{% url 'projects:add_project' %}">Create <i class="plus icon"></i></a>
-            <div class="ui huge primary button">Join<i class="right arrow icon"></i></div>
-            <a class="ui button" href="{% url 'django.contrib.auth.views.logout' %}?next={{request.path}}">Logout</a>
-        {% else %}
-        <a class="ui button" href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">Login</a>
-        {% endif %}
+        <h2>Login</h2>
     </div>
 </div>
 {% endblock %}
