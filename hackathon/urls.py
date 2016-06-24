@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^', include('projects.urls')),
     url(r'^projects/', include('projects.urls')),
     url(r'^hackathons/', include('hackathons.urls', namespace="hackathons")),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, {'template_name':'auth/login.html'}, name='auth_login'),
     url(r'^logout/$', auth_views.logout, name='auth_logout'),
