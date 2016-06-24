@@ -1,16 +1,18 @@
-{% extends "base.html" %}
+{% extends 'base.html'' %}
+
 {% block title %}
     {{ project.name }}
 {% endblock title %}
-{% block header %}
-<div class="ui borderless compact inverted menu left attached">
-    <div class="ui container">
-        <a href="javascript:history.go(-1)" class="header item">
-            <i class="left arrow icon"></i>
-        </a>
-    </div>
-</div>
 
+{% block left_menu %}
+<div class="ui container">
+    <a href="javascript:history.go(-1)" class="header item">
+        <i class="left arrow icon"></i>
+    </a>
+</div>
+{% endblock %}
+
+{% block header %}
 <div class="ui text container">
     <h1 class="ui inverted header">
         <i class="cubes icon"></i>&nbsp;Project
@@ -35,7 +37,7 @@
 <div class="ui text container">
     <div class="ui vertical stripe segment">
         <h3 class="ui horizontal divider header">
-            <!--<i class="paint brush icon"></i>--> 
+            <!--<i class="paint brush icon"></i>-->
         </h3>
         <h3 class="ui horizontal divider header">
             <i class="user icon"></i> Participants

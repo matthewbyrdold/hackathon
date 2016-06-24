@@ -1,31 +1,6 @@
-{% extends 'base.html' %}
-
-{% block header %}
-<div class="ui borderless compact inverted menu left attached">
-    <div class="ui container">
-        <a href="javascript:history.go(-1)" class="header item">
-            <i class="left arrow icon"></i>
-        </a>
-    </div>
-</div>
-<div class="ui text container">
-    <h1 class="ui inverted header">
-        {% block form_header %}{% endblock %}
-    </h1>
-</div>
-{% endblock %}
-
-{% block content %}
-<div class="ui text container">
-
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-    <div class="ui divider"></div>
-
-    <form class="ui form middle aligned" {% block form_attrs %}{% endblock %}>
-        {% csrf_token %}
-        {% if form %}
-            <div class="required field">
+{% extends 'form_base.html' %}
+{% block form_fields %}
+<div class="required field">
                 <label>Project Name</label>
                 {{form.name}}
             </div>
@@ -62,10 +37,4 @@
                 {{ form.tags }}
             </div>
             <button class="ui button" type="submit">Submit</button>
-        {% else %}
-        Error loading form.
-        {% endif %}
-    </form>
-
-</div>
 {% endblock %}
