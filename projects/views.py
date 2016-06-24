@@ -13,12 +13,12 @@ from django.contrib.auth.models import User
 
 from .forms import ProjectForm
 
-def index(request, hackathon = get_current_hackathon()):
+def index(request, hackathon = decide_which_hackathon_to_display()):
     if hackathon:
         projects = Project.objects.filter(hackathon__number = hackathon)
     else:
         projects = Project.objects.all()
-    hackathons = Hackathon.objects.all()
+    hackathons = decide_which_hackathons_to_display(4)
     context = {'projects': projects, 'hackathon': hackathon, 'hackathons': hackathons}
     return render(request, 'projects/index.html', context)
 
