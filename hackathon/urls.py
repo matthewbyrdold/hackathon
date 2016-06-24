@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='auth_logout'),
     url(r'^signup/complete/$',
         TemplateView.as_view(template_name='auth/signup_complete.html'),
-        name='auth_signup_completed'),
+        name='auth_signup_complete'),
     url(r'^signup/$',
         RegistrationView.as_view(),
         name='auth_signup'),

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Sign up completed{% endblock %}
+
+{% block header %}
+<div class="ui text container">
+    <h1 class="ui inverted header">
+            Sign up successful<i class="check square icon"></i>
+    </h1>
+</div>
+{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    function redirect() {
+        window.location.href = "{% url 'projects:index' %}";
+    }
+    setTimeout(redirect, 2000);
+</script>
+<div class="ui center aligned grid">
+    <div class="center aligned four wide column">
+        <div class="ui hidden divider"></div>
+            <div class="ui active large inline text loader">Redirecting</div>
+        <div class="ui hidden divider"></div>
+            <div><a href="{% url 'projects:index' %}">Click here</a> if nothing happens</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
