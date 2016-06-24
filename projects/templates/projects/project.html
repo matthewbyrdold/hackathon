@@ -1,9 +1,24 @@
 {% extends "projects/base.html" %}
+
 {% block title %}
-    {{ project.name }}
+    Hackathon Project: {{ project.name }}
 {% endblock title %}
+
+{% block header %}
+  <div class="ui fixed borderless inverted menu">
+    <div class="ui container">
+      <a href="{% url 'projects:index' %}" class="header item">
+        <i class="left arrow icon"></i>
+      </a>
+      <div class="header item">Hackathon Project</div>
+    </div>
+  </div>
+{% endblock header %}
+
 {% block content %}
-    <h1>{{ project }}</h1>
+<div class="ui center aligned grid">
+    <div class="left aligned eight wide column">
+    <h1>{{ project.name }}</h1>
     <table>
         <tr><td>Required number of participants:</td><td>{{ project.min_participants }} to {{ project.max_participants }}</td></tr>
         <tr><td>Hackathon:</td><td>{{ project.hackathon|default_if_none:"Unassigned" }}</td></tr>
@@ -17,13 +32,15 @@
             {% for participant in project.participants_as_list %}
                 <li>{{ participant }}</li>
             {% endfor %}
-            </ul>   
+            </ul>
         {% else %}
             Nobody :( </br>
-        {% endif %} 
+        {% endif %}
     </div>
     <div id="description">
         <h3>Descriptions</h3>
         {{ project.description }}
     </div>
+    </div>
+</div>
 {% endblock content %}
