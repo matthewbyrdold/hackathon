@@ -22,14 +22,51 @@
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <form class="ui form" {% block form_attrs %}{% endblock %}>
+    <div class="ui divider"></div>
+
+    <form class="ui form middle aligned" {% block form_attrs %}{% endblock %}>
         {% csrf_token %}
         {% if form %}
-            <ul>
-            {{form.as_p}}
-            </ul>
+            <div class="required field">
+                <label>Project Name</label>
+                {{form.name}}
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <label>Hackathon</label>
+                    {{ form.hackathon }}
+                </div>
+                <div class="required field">
+                    <label>Author</label>
+                    {{ form.author }}
+                </div>
+            </div>
+            <div class="required field">
+                <label>Description</label>
+                {{ form.description }}
+            </div>
+            <div class="two fields">
+                <div class="required field">
+                    <label>Min. people</label>
+                    {{ form.min_participants }}
+                </div>
+                <div class="required field">
+                    <label>Max. people</label>
+                    {{ form.max_participants }}
+                </div>
+            </div>
+            <div class="field">
+                <label>Skills required</label>
+                {{ form.skills }}
+            </div>
+            <div class="field">
+                <label>Tags</label>
+                {{ form.tags }}
+            </div>
+            <button class="ui button" type="submit">Submit</button>
+        {% else %}
+        Error loading form.
         {% endif %}
-        <button class="ui button" type="submit">Submit</button>
     </form>
 
 </div>
