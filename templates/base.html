@@ -11,7 +11,9 @@
 
 <body>
 <div class="ui inverted vertical masthead center aligned segment">
-<div class="ui menu inverted">
+<div class="ui menu inverted borderless">
+    {% block left_menu %} 
+    {% endblock %}
     <div class="right menu">
     {% if request.user.is_authenticated %}
         <div class="item"><a href="{% url 'auth_logout' %}?next={{request.path}}"><div class="ui button top right">Logout</div></a></div>
