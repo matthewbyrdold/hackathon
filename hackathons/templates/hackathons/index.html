@@ -19,37 +19,32 @@
 
 
 {% block content %}
-<div class="ui center aligned grid">
-    <div class="left aligned twelve wide column">
-        <div class="ui vertical stripe segment">
-
-            {% if hackathons %}
-
-                <div class="ui three doubling stackable cards">
-                {% for hackathon in hackathons %}
-                    <div class="ui fluid card">
-                        <div class="content">
-                            <a class="header" a href="{% url 'projects:index' hackathon.number %}">
-                                Hackathon #{{ hackathon.number }}
-                            </a>
-                            <div class="meta">
-                                {{ hackathon.start_date }} - {{ hackathon.end_date }}
-                            </div class="meta">
-                        </div>
-                            <div class="ui one bottom attached buttons">
-                                <a class="ui button" href="{% url 'projects:index' hackathon.number %}">View</a>
-                                <div class="ui primary button"></div>
-                            </div>
-                    </div>
-                {% endfor %}
+<div class="ui main text container">
+    <div class="ui hidden divider"></div>
+    {% if hackathons %}
+    <div class="ui relaxed celled animated list">
+        {% for hackathon in hackathons reversed %}
+            <div class="item">
+                <div class="right floated content">
+                    <a class="ui small button" href="{% url 'projects:index' hackathon.number %}">View Projects</a>
+                    <div class="ui small primary button">Create Project</div>
                 </div>
-
-            {% else %}
-                <p>There are no hackathons!</p>
-
-            {% endif %}
-        </div>
+                <div class="content">
+                    <a class="header" a href="{% url 'projects:index' hackathon.number %}">
+                        <h3>Hackathon #{{ hackathon.number }}</h3>
+                    </a>
+                    <div class="description">
+                        {{ hackathon.start_date }} - {{ hackathon.end_date }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
+
+    {% else %}
+        <p>There are no hackathons!</p>
+
+    {% endif %}
 </div>
 {% endblock %}
 
