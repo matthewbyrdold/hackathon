@@ -33,7 +33,7 @@ def add_project(request):
     context = {
         "form": form
     }
-    
+
     return render(request, "projects/add.html", context)
 
 def edit_project(request, project_id):
