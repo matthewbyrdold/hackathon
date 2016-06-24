@@ -1,4 +1,13 @@
 {% extends 'base.html' %}
+
+{% block left_menu %}
+<div class="ui container">
+    <a href="javascript:history.go(-1)" class="header item">
+        <i class="left arrow icon"></i>
+    </a>
+</div>
+{% endblock %}
+
 {% block header %}
 <div class="ui inverted vertical masthead center aligned segment">
     <div class="ui text container">
