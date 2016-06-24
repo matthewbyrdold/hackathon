@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
+{% block left_menu %}
+  <div class="ui simple dropdown item">
+    Browse Hackathons
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        {% for hackathon in hackathons %}
+        <a href="{% url 'projects:index' hackathon.number %}" class="item" > Hackathon #{{ hackathon.number }} </a>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
+
 {% block header %}
 <div class="ui text container">
     <h1 class="ui inverted header">
