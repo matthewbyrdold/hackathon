@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
     <title>{% block title %}Hackathon{% endblock %}</title>
 <head>
@@ -12,7 +13,7 @@
 <body>
 <div class="ui inverted vertical masthead center aligned segment">
 <div class="ui menu inverted borderless">
-    {% block left_menu %} 
+    {% block left_menu %}
     {% endblock %}
     <div class="right menu">
     {% block right_menu %}

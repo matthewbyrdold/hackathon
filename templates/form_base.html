@@ -23,7 +23,7 @@
 
     <div class="ui divider"></div>
 
-    <form class="ui form middle aligned" {% block form_attrs %}{% endblock %}>
+    <form id="base_form" class="ui form middle aligned" {% block form_attrs %}{% endblock %}>
         {% csrf_token %}
         {% if form %}
             {% block form_fields %}{% endblock %}
