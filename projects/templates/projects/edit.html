@@ -1,5 +1,13 @@
 {% extends 'projects/project_form_base.html' %}
 
+{% block left_menu %}
+<div class="ui container">
+    <a href="{% url 'projects:project' project.id %}" class="header item">
+        <i class="left arrow icon"></i>
+    </a>
+</div>
+{% endblock %}
+
 {% block title %}
     Edit Project: {{ project.name }}
 {% endblock %}
@@ -12,3 +20,27 @@
     action="{% url 'projects:edit_project' project.id %}"
     method="post"
 {% endblock%}
+
+{% block delete_button %}
+    <button type="button" class="ui red right floated button" id="open_delete_modal">Delete</button>
+    <div class="ui basic small modal" id="delete_modal">
+        <h1 class="header">
+            Delete Project?
+        </h1>
+        <div class="content">
+            This cannot be undone.  It will be gone forever.
+        </div>
+        <div class="actions">
+            <button class="ui basic inverted red button" type="submit" form="base_form" name="delete"><i class="warning sign icon"></i>Delete</button>
+            <button class="ui basic inverted button" id="close_delete_modal">Cancel</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#open_delete_modal').click(function(){
+           $('#delete_modal').modal('show');
+        });
+        $('#close_delete_modal').click(function(){
+           $('#delete_modal').modal('hide');
+        });
+    </script>
+{% endblock %}
