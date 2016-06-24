@@ -1,1 +1,2 @@
 gunicorn==19.3.0
+django-contrib-comments==1.7.1
