@@ -1,0 +1,22 @@
+{% extends 'projects/base.html' %}
+
+{% block header %}
+<h1>{% block form_header %}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+<form {% block form_attrs %}{% endblock %}>
+    {% csrf_token %}
+    {% if form %}
+        <ul>
+        {{form.as_p}}
+        </ul>
+    {% endif %}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

@@ -1,13 +1,14 @@
-<h1>Editing Project: {{ project.name }}</h1>
+{% extends 'projects/form_base.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block title %}
+    Edit Project: {{ project.name }}
+{% endblock %}
 
-<form action="{% url 'projects:edit_project' project.id %}" method="post">
-    {% csrf_token %}
-    {% if form %}
-        <ul>
-        {{form.as_p}}
-        </ul>
-    {% endif %}
-    <input type="submit" value="Submit" />
-</form>
+{% block form_header %}
+    Editing Project: {{ project.name }}
+{% endblock %}
+
+{% block form_attrs %}
+    action="{% url 'projects:edit_project' project.id %}"
+    method="post"
+{% endblock%}

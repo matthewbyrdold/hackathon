@@ -1,13 +1,14 @@
-<h1>Adding Project</h1>
+{% extends 'projects/form_base.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block title %}
+    Add Project
+{% endblock %}
 
-<form action="{% url 'projects:add_project' %}" method="post">
-    {% csrf_token %}
-    {% if form %}
-        <ul>
-        {{form.as_p}}
-        </ul>
-    {% endif %}
-    <input type="submit" value="Submit" />
-</form>
+{% block form_header %}
+    Adding Project
+{% endblock %}
+
+{% block form_attrs %}
+    action="{% url 'projects:add_project' %}"
+    method="post"
+{% endblock %}
