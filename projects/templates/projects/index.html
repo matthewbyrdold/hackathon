@@ -1,19 +1,17 @@
-{% extends 'projects/base.html' %}
+{% extends 'base.html' %}
 
 {% block header %}
-<div class="ui inverted vertical masthead center aligned segment">
-    <div class="ui text container">
-        <h1 class="ui inverted header">
-            {% if hackathon %}
-                Hackathon #{{ hackathon }}
-            {% else %}
-                Hackathon <i class="coffee icon"></i>
-            {% endif %}
-        </h1>
-        <h2>View, join or create projects for the next Hackathon.</h2>
-            <a class="ui huge primary button" href="{% url 'projects:add_project' %}">Create <i class="plus icon"></i></a>
-            <div class="ui huge primary button">Join<i class="right arrow icon"></i></div>
-    </div>
+<div class="ui text container">
+    <h1 class="ui inverted header">
+        {% if hackathon %}
+            Hackathon #{{ hackathon }}
+        {% else %}
+            Hackathon <i class="coffee icon"></i>
+        {% endif %}
+    </h1>
+    <h2>View, join or create projects for the next Hackathon.</h2>
+    <a class="ui huge primary button" href="{% url 'projects:add_project' %}">Create <i class="plus icon"></i></a>
+    <div class="ui huge primary button">Join<i class="right arrow icon"></i></div>
 </div>
 {% endblock %}
 

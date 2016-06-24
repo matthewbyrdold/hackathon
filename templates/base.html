@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}" />
+    <script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+    <title>{% block title %}Hackathon{% endblock %}</title>
+<head>
+
+<body>
+<div class="ui inverted vertical masthead center aligned segment">
+<div class="ui menu inverted">
+    <div class="right menu">
+    {% if request.user.is_authenticated %}
+        <div class="item"><div class="ui primary button">Sign up</div></div>
+        <div class="item"><a href="{% url 'auth_login' %}?next={{ request.path }}"><div class="ui button">Log-in</div></a></div>
+    {% else %}
+    <div class="item"><a href="{% url 'auth_logout' %}?next={{request.path}}"><div class="ui button top right">Logout</div></a></div>
+    {% endif %}
+    </div>
+</div>
+    {% block header %}{% endblock %}
+</div>
+    {% block content %}{% endblock %}
+</body>
+</html>
