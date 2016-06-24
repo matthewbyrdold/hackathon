@@ -1,13 +1,14 @@
-<h1>Editing Hackathon: {{ hackathon.name }}</h1>
+{% extends 'hackathons/hackathon_form_base.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block title %}
+    Edit Hackathon #{{ hackathon.number }}
+{% endblock %}
 
-<form action="{% url 'hackathons:edit_hackathon' hackathon.number %}" method="post">
-    {% csrf_token %}
-    {% if form %}
-        <ul>
-        {{form.as_p}}
-        </ul>
-    {% endif %}
-    <input type="submit" value="Submit" />
-</form>
+{% block form_header %}
+    Editing Hackathon #{{ hackathon.number }}
+{% endblock %}
+
+{% block form_attrs %}
+    action="{% url 'hackathons:edit_hackathon' hackathon.number %}"
+    method="post"
+{% endblock%}

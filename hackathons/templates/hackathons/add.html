@@ -1,13 +1,14 @@
-<h1>Adding Hackathon</h1>
+{% extends 'hackathons/hackathon_form_base.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block title %}
+    Add Hackathon
+{% endblock %}
 
-<form action="{% url 'hackathons:add_hackathon' %}" method="post">
-    {% csrf_token %}
-    {% if form %}
-        <ul>
-        {{form.as_p}}
-        </ul>
-    {% endif %}
-    <input type="submit" value="Submit" />
-</form>
+{% block form_header %}
+    Adding Hackathon
+{% endblock %}
+
+{% block form_attrs %}
+    action="{% url 'hackathons:add_hackathon' %}"
+    method="post"
+{% endblock %}
