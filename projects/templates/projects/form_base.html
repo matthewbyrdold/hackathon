@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
-{% block header %}
-<div class="ui borderless compact inverted menu left attached">
-    <div class="ui container">
-        <a href="javascript:history.go(-1)" class="header item">
-            <i class="left arrow icon"></i>
-        </a>
-    </div>
+{% block left_menu %}
+<div class="ui container">
+    <a href="javascript:history.go(-1)" class="header item">
+        <i class="left arrow icon"></i>
+    </a>
 </div>
+{% endblock %}
+
+{% block header %}
 <div class="ui text container">
     <h1 class="ui inverted header">
         {% block form_header %}{% endblock %}
