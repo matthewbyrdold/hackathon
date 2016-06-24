@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load comments %}
 
 {% block title %}
@@ -21,9 +22,18 @@
     <h2>{{project}}</h2>
     <h3>Author: {{ project.author }}</h3>
     <a class="ui secondary button" href="{% url 'projects:edit_project' project.id %}">Edit&nbsp;&nbsp;&nbsp;<i class="edit icon"></i></a>
-    {% if project.spaces_left %}
-        <div class="ui primary button">Join<i class="right arrow icon"></i></div>
+
+    <form style="display:inline" action="{% url 'projects:project' project.id %}" method="POST">
+    {% csrf_token %}
+    {% if current_user_participating %}
+        <button type="submit" name="leave" class="ui red button">Leave&nbsp;&nbsp;<i class="sign out icon"></i></button>
+    {% else %}
+        {% if project.spaces_left %}
+            <button type="submit" name="join" class="ui primary button">Join<i class="right arrow icon"></i></button>
+        {% endif %}
     {% endif %}
+    </form>
+
     {% if project.spaces_left == False %}
         <div class="ui bottom left attached teal label">Project Full</div>
     {% endif %}
@@ -44,12 +54,15 @@
         <div class="ui basic center aligned segment">
             {% if project.participating_users.count > 0 %}
                 {% for participant in project.participating_users.all %}
-                    <div class="ui label">
-                        {{ participant.username }}
-                        {% if request.user == participant %}
-                            <a><i class="delete icon"></i></a>
-                        {% endif %}
-                    </div>
+                    {% if request.user == participant and request.user.is_authenticated %}
+                        <div class="ui blue label">
+                            {{ participant.username }}
+                        </div>
+                    {% else %}
+                        <div class="ui label">
+                            {{ participant.username }}
+                        </div>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 <a class="ui label"><i class="warning icon"></i> No participants</a>

@@ -1,13 +1,16 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 from django.http import HttpResponse
-from django.template import loader
 from django.http import HttpResponseRedirect
+from django.template import loader
 from django.db.models import Max
 from django.contrib.auth.decorators import login_required
 
 from helpers import *
 from .models import Project
 from .models import Hackathon
+from django.contrib.auth.models import User
+
 from .forms import ProjectForm
 
 def index(request, hackathon = get_current_hackathon()):
@@ -21,7 +24,23 @@ def index(request, hackathon = get_current_hackathon()):
 
 def project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
-    return render(request, 'projects/project.html', {'project':project})
+
+    if request.method == 'POST':
+        if "leave" in request.POST:
+            project.participating_users.remove(request.user)
+            current_user_participating = False
+        if "join" in request.POST:
+            project.participating_users.add(request.user)
+            current_user_participating = True
+        redirect_url = "/projects/" + str(project_id)
+        return HttpResponseRedirect(redirect_url, {'project':project, 'current_user_participating':current_user_participating})
+
+    if request.user.is_authenticated():
+        current_user_participating = request.user.participant.filter(id=project.id).exists()
+    else:
+        current_user_participating = False
+
+    return render(request, 'projects/project.html', {'project':project, 'current_user_participating':current_user_participating})
 
 @login_required
 def add_project(request):
@@ -37,6 +56,7 @@ def add_project(request):
 
     return render(request, "projects/add.html", context)
 
+@login_required
 def edit_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     form = ProjectForm(request.POST or None, instance=project)

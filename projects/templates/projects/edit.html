@@ -1,5 +1,13 @@
 {% extends 'projects/project_form_base.html' %}
 
+{% block left_menu %}
+<div class="ui container">
+    <a href="{% url 'projects:project' project.id %}" class="header item">
+        <i class="left arrow icon"></i>
+    </a>
+</div>
+{% endblock %}
+
 {% block title %}
     Edit Project: {{ project.name }}
 {% endblock %}
