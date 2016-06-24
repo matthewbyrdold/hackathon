@@ -46,7 +46,7 @@
                             </a>
                             <div class="meta">
                                 {{ project.min_participants }} - {{ project.max_participants }} people,
-                                {{ project.participants_count }} signed up
+                                {{ project.participating_users.count }} signed up
                             </div class="meta">
                             <div class="description">
                                 {{ project.description|truncatechars:240 }}
