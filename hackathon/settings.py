@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'hackathons.apps.HackathonsConfig',
     'projects.apps.ProjectsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
