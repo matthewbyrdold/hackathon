@@ -99,6 +99,7 @@
                         {{ form.timestamp }}
                         {{ form.security_hash }}
                     </div>
+                    <input type="hidden" name="next" value="{% url 'projects:project' project.id %}" />
                     <button class="ui button" type="submit">Submit</button>
                 </form>
             {% else %}
