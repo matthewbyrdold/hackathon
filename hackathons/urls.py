@@ -4,4 +4,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^add/$', views.add_hackathon, name='add_hackathon'),
+    url(r'^edit/(?P<number>[0-9]+)/$', views.edit_hackathon, name='edit_hackathon')
 ]

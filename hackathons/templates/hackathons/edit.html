@@ -1,0 +1,13 @@
+<h1>Editing Hackathon: {{ hackathon.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'hackathons:edit_hackathon' hackathon.number %}" method="post">
+    {% csrf_token %}
+    {% if form %}
+        <ul>
+        {{form.as_p}}
+        </ul>
+    {% endif %}
+    <input type="submit" value="Submit" />
+</form>
