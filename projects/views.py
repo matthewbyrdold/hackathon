@@ -2,13 +2,19 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.template import loader
 from django.http import HttpResponseRedirect
+from django.db.models import Max
 
+from helpers import *
 from .models import Project
+from .models import Hackathon
 from .forms import ProjectForm
 
-def index(request):
-    projects = Project.objects.all()
-    context = {'projects': projects}
+def index(request, hackathon = get_current_hackathon()):
+    if hackathon:
+        projects = Project.objects.filter(hackathon__number = hackathon)
+    else:
+        projects = Project.objects.all()
+    context = {'projects': projects, 'hackathon': hackathon}
     return render(request, 'projects/index.html', context)
 
 def project(request, project_id):

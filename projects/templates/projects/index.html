@@ -1,10 +1,11 @@
 {% extends 'projects/base.html' %}
 
 {% block header %}
+<div class="ui inverted vertical masthead center aligned segment">
     <div class="ui text container">
         <h1 class="ui inverted header">
-            {% if current_hackathon %}
-                Hackathon {{ current_hackathon }}
+            {% if hackathon %}
+                Hackathon #{{ hackathon }}
             {% else %}
                 Hackathon <i class="coffee icon"></i>
             {% endif %}
@@ -13,55 +14,61 @@
         <a class="ui huge primary button" href="{% url 'projects:add_project' %}">Create <i class="plus icon"></i></a>
         <div class="ui huge primary button">Join<i class="right arrow icon"></i></div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
-    <div class="ui vertical stripe segment">
+<div class="ui center aligned grid">
+    <div class="left aligned twelve wide column">
+        <div class="ui vertical stripe segment">
 
-        <h2 class="ui header">Projects</h2>
+            <h2 class="ui header">Projects</h2>
 
-        {% if projects %}
+            {% if projects %}
 
-            <div class="ui two doubling stackable cards">
-            {% for project in projects %}
-                <div class="ui fluid card">
-                    <div class="content">
+                <div class="ui two doubling stackable cards">
+                {% for project in projects %}
+                    <div class="ui fluid card">
+                        <div class="content">
+                            <a class="header" href="{% url 'projects:project' project.id %}">
+                                {{ project.name }}
+                            </a>
+                            <div class="meta">
+                                {{ project.min_participants }} - {{ project.max_participants }} people,
+                                {{ project.participants_count }} signed up
+                            </div class="meta">
+                            <div class="description">
+                                {{ project.description|truncatechars:240 }}
+                            </div>
+                        </div>
+                    <!-- <div class="extra content">-->
+                            <div class="ui two bottom attached buttons">
+                                <a class="ui button" href="{% url 'projects:project' project.id %}">View</a>
+                                <div class="ui primary button">Join</div>
+                            </div>
+                        <!--</div>-->
+                    </div>
+                {% endfor %}
+                </div>
+    <!--            <div class="ui divided selection list">
+                {% for project in projects %}
+                    <div class="item">
                         <a class="header" href="{% url 'projects:project' project.id %}">
                             {{ project.name }}
                         </a>
-                        <div class="meta">
-                            {{ project.min_participants }} - {{ project.max_participants }} people,
-                            {{ project.participants_count }} signed up
-                        </div class="meta">
+                            <!--<div class="header">{{ project.name }}</div>-->
+    <!--                    </a>
                         <div class="description">
-                            {{ project.description|truncatechars:240 }}
+                            <p>{{ project.description|truncatechars:80 }}</p>
                         </div>
                     </div>
-                <!-- <div class="extra content">-->
-                        <div class="ui two bottom attached buttons">
-                            <a class="ui button" href="{% url 'projects:project' project.id %}">View</a>
-                            <div class="ui primary button">Join</div>
-                        </div>
-                    <!--</div>-->
-                </div>
-            {% endfor %}
-            </div>
-<!--            <div class="ui divided selection list">
-            {% for project in projects %}
-                <div class="item">
-                    <a class="header" href="{% url 'projects:project' project.id %}">
-                        {{ project.name }}
-                        <!--<div class="header">{{ project.name }}</div>-->
-<!--                    </a>
-                    <div class="description">
-                        <p>{{ project.description|truncatechars:80 }}</p>
-                    </div>
-                </div>
-            {% endfor %}
-            </div>-->
+                {% endfor %}
+                </div>-->
 
-        {% else %}
-            <p>This hackathon has no projects!</p>
-        {% endif %}
+            {% else %}
+                <p>This hackathon has no projects!</p>
+            {% endif %}
+        </div>
     </div>
+</div>
 {% endblock %}

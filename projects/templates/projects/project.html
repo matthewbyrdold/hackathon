@@ -3,6 +3,7 @@
     {{ project.name }}
 {% endblock title %}
 {% block header %}
+<div class="ui inverted vertical masthead center aligned segment">
     <div class="ui text container">
         <h1 class="ui inverted header">
             Project <i class="cubes icon"></i> 
@@ -21,6 +22,7 @@
             <div class="ui bottom right attached red label">Hackathon unassigned</div>
         {% endif %}
     </div>
+</div>
 {% endblock %}
 {% block content %}
     <div class="ui vertical stripe segment">
@@ -46,11 +48,13 @@
         <i class="certificate icon"></i>Skills
     </h3>
     {% if project.skills %}
+    <div class="ui basic segment">
         <div class="ui list">
             {% for skill in project.skills_list %}
                 <div class="item"><i class="right triangle icon"></i>{{ skill }}</div>
             {% endfor %}
         </div>
+    </div>
     {% endif %}
 
     <div class="ui basic center aligned segment">
