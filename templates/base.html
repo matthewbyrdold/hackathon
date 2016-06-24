@@ -15,12 +15,14 @@
     {% block left_menu %} 
     {% endblock %}
     <div class="right menu">
+    {% block right_menu %}
     {% if request.user.is_authenticated %}
         <div class="item"><a href="{% url 'auth_logout' %}?next={{request.path}}"><div class="ui button top right">Logout</div></a></div>
     {% else %}
         <div class="item"><div class="ui primary button">Sign up</div></div>
         <div class="item"><a href="{% url 'auth_login' %}?next={{ request.path }}"><div class="ui button">Log-in</div></a></div>
     {% endif %}
+    {% endblock %}
     </div>
 </div>
     {% block header %}{% endblock %}
