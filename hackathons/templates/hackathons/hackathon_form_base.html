@@ -1,0 +1,18 @@
+{% extends 'form_base.html' %}
+{% block form_fields %}
+    <div class="required field">
+        <label>Hackathon number</label>
+        {{form.number}}
+    </div>
+    <div class="two fields">
+        <div class="required field">
+            <label>Start date</label>
+            {{ form.start_date }}
+        </div>
+        <div class="required field">
+            <label>End date</label>
+            {{ form.end_date }}
+        </div>
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+{% endblock %}
