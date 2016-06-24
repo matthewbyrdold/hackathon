@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'hackathons.apps.HackathonsConfig',
     'projects.apps.ProjectsConfig',
     'django.contrib.admin',
+    'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

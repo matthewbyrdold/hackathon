@@ -5,7 +5,7 @@ import re
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.validators import MinValueValidator
-
+from django.contrib.auth.models import User
 from hackathons.models import Hackathon
 
 @python_2_unicode_compatible
@@ -14,6 +14,7 @@ class Project(models.Model):
     description = models.TextField()
     author = models.CharField(max_length=50)
     participants = models.TextField(blank=True)
+    participating_users = models.ManyToManyField(User)
     min_participants = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     max_participants = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     hackathon = models.ForeignKey(Hackathon, on_delete=models.SET_NULL, null=True, blank=True)

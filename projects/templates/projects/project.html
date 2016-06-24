@@ -37,20 +37,30 @@
 {% block content %}
 <div class="ui text container">
     <div class="ui vertical stripe segment">
-        <h3 class="ui horizontal divider header">
-            <!--<i class="paint brush icon"></i>-->
-        </h3>
+        <div class="hidden divider"></div>
         <h3 class="ui horizontal divider header">
             <i class="user icon"></i> Participants
         </h3>
         <div class="ui basic center aligned segment">
-            {% if project.participants %}
-                {% for participant in project.participants_as_list %}
-                    <a class="ui label">{{ participant }}</a>
+            {% if project.participating_users.count > 0 %}
+                {% for participant in project.participating_users.all %}
+                    <div class="ui label">
+                        {{ participant.username }}
+                        {% if request.user == participant %}
+                            <a><i class="delete icon"></i></a>
+                        {% endif %}
+                    </div>
                 {% endfor %}
             {% else %}
                 <a class="ui label"><i class="warning icon"></i> No participants</a>
             {% endif %}
+            <!--<div class="ui hidden divider"></div>-->
+            <h5>
+                {% if project.min_participants != project.max_participants %}
+                    {{ project.min_participants }} -
+                {% endif %}
+                {{ project.max_participants }} requested
+            </h5>
         </div>
         <h3 class="ui horizontal divider header">
             <i class="book icon"></i> Description
@@ -75,7 +85,7 @@
         {% if project.tags %}
         <i class="tags icon"></i>
             {% for tag in project.tag_list %}
-                <a class="ui label">{{ tag }}<!--<i class="delete icon"></i>--></a>
+                <a class="ui tag label">{{ tag }}<!--<i class="delete icon"></i>--></a>
             {% endfor %}
         {% endif %}
     </div>
